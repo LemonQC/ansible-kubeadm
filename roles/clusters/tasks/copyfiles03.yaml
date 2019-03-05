@@ -1,0 +1,3 @@
+#First create a new directory
+- name: create a directoty
+  file: path=/root/mydata state=directory

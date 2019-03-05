@@ -1,0 +1,42 @@
+- name: config the source
+  shell: yum-config-manager --add-repo  https://download.docker.com/linux/centos/docker-ce.repo
+
+- name: make cache
+  shell: yum makecache fast
+
+- name: set up docker
+  shell: yum install -y --setopt=obsoletes=0 docker-ce-18.06.1.ce-3.el7
+
+- name: enable docker service
+  shell: systemctl enable docker
+- name: start docker
+  shell: systemctl start docker
+
+
+- name: set up k8s source
+  copy: src=/etc/ansible/resources/kubernetes.repo  dest=/etc/yum.repos.d/ 
+
+- name: make cache
+  shell: yum makecache fast
+
+- name: set up kubeadm kubelet kubectl
+  yum:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - kubectl
+      - kubeadm
+      - kubelet
+
+
+- name: reload daemon
+  shell: systemctl daemon-reload
+- name: enable kublet
+  shell: systemctl enable kubelet.service
+- name: start kubelet
+  shell: systemctl start kubelet.service
+
+
+- name: off swap
+  shell: sed -i 's/=/=--fail-swap-on=false/g'  /etc/sysconfig/kubelet
+

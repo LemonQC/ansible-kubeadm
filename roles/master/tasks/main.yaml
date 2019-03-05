@@ -1,0 +1,3 @@
+- include: copyfiles01.yaml
+- include: loadimages02.yaml
+- include: masterinit03.yaml

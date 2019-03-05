@@ -1,0 +1,9 @@
+- name: load the slave images
+  shell: python /root/mydata/mynodeload.py
+- name: load the istio images
+  shell: python /root/mydata/myistioload.py
+
+- name: send command
+  copy: src=/tmp/192.168.129.101/root/mydata/myjoin dest=/root/mydata
+- name: convert command
+  shell: eval $(cat /root/mydata/mydata/join)

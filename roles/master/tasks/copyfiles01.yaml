@@ -1,0 +1,10 @@
+
+
+- name: copy flannel
+  copy: src=/etc/ansible/resources/kube-flannel.yml dest=/root/mydata/
+- name: copy master load
+  copy: src=/etc/ansible/resources/mymasterload.py dest=/root/mydata/
+
+- name: unzip master
+  shell: tar -xvf /root/mydata/master.tar -C /root/mydata/
+

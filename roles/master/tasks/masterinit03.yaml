@@ -1,0 +1,16 @@
+- name: master op
+  shell: kubeadm init  --kubernetes-version=v1.13.0  --pod-network-cidr=10.244.0.0/16  --apiserver-advertise-address=192.168.129.101  --ignore-preflight-errors=Swap
+- name: mk
+  shell: mkdir -p $HOME/.kube
+- name: copys
+  shell: cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+- name: power
+  shell: chown $(id -u):$(id -g) $HOME/.kube/config
+- name: cni
+  shell: kubectl apply -f  /root/mydata/kube-flannel.yml
+
+- name: get join
+  shell: echo $(kubeadm token create --print-join-command) > /root/mydata/join
+- name: fetch the command
+  fetch: src=/root/mydata/join dest=/etc/ansible/resources
+

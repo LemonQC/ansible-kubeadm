@@ -1,0 +1,16 @@
+- name: download the module
+  yum:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - curl
+      - vim
+      - net-tools
+      - telnet
+      - tcpdump
+      - bind-utils
+      - socat
+      - ntp
+      - yum-utils
+      - device-mapper-persistent-data
+      - lvm2

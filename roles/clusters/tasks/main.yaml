@@ -1,0 +1,4 @@
+- include: init01.yaml
+- include: install02.yaml
+- include: copyfiles03.yaml
+- include: dockerandk8s04.yaml

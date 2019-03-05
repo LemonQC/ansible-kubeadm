@@ -1,0 +1,2 @@
+- name: delete the folder
+  file: path=/root/mydata/ state=absent

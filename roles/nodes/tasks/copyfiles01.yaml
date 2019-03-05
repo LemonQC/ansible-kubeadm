@@ -1,0 +1,9 @@
+- name: copy slave load
+  copy: src=/etc/ansible/resources/mynodeload.py dest=/root/mydata/
+
+- name: copy node
+  copy: src=/etc/ansible/resources/node.tar dest=/root/mydata/
+
+- name: unzip node
+  shell: tar -xvf /root/mydata/node.tar -C /root/mydata/
+

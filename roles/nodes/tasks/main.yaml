@@ -1,0 +1,2 @@
+- include: copyfiles01.yaml
+- include: nodeinit02.yaml

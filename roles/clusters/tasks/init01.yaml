@@ -1,0 +1,44 @@
+#写入hosts
+- name: modify the configuration
+  shell: echo "{{ item }}" >> /etc/hosts
+  with_items:
+    - "192.168.129.101 master"
+    - "192.168.129.102 node1"
+#修改主机名称
+- name: shows ip
+  shell: ip a
+- name: show address
+  hostname: name=web{{ ansible_default_ipv4.address.split('.')[-1] }}
+- name: change name
+  raw: "echo {{hostname|quote}} > /etc/hostname"
+- name: changes
+  shell: hostname {{hostname|quote}}
+
+#禁用防火墙
+- name: stop the fire wall
+  shell: systemctl stop firewalld && systemctl disable firewalld
+
+
+- name: disable the selinux
+  shell: setenforce 0
+- name: disable the selinux1
+  shell: sed -i 's/enforcing/disabled/' /etc/selinux/config
+
+- name: enable ips
+  file: path=/etc/sysctl.d/k8s.conf state=touch
+- name: write ip6
+  shell: echo "net.bridge.bridge-nf-call-ip6tables = 1" >> /etc/sysctl.d/k8s.conf
+- name: wrie iptables
+  shell: echo "net.bridge.bridge-nf-call-iptables = 1" >> /etc/sysctl.d/k8s.conf
+- name: wrie ip forward
+  shell: echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.d/k8s.conf
+- name: vm swap
+  shell: echo "vm.swappiness=0" >> /etc/sysctl.d/k8s.conf
+- name: enable the conf
+  shell: modprobe br_netfilter
+- name: use conf
+  shell: sysctl -p /etc/sysctl.d/k8s.conf
+
+- name: disable swap
+  shell: swapoff -a
+

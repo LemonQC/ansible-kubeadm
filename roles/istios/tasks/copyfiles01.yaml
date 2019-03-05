@@ -1,0 +1,8 @@
+- name: copy istio load
+  copy: src=/etc/ansible/resources/myistioload.py dest=/root/mydata/
+- name: copy istio
+  copy: src=/etc/ansible/resources/istio.tar dest=/root/mydata/
+
+- name: unzip istio
+  shell: tar -xvf /root/mydata/istio.tar -C /root/mydata/
+
