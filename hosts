@@ -1,0 +1,14 @@
+#设置ansible hosts path=/etc/ansible/hosts
+
+[clusters]
+192.168.129.101 hostname=master ansible_ssh_user=root  ansible_ssh_pass=1995
+
+192.168.129.102 hostname=node1 ansible_ssh_user=root  ansible_ssh_pass=1995
+
+[master]
+192.168.129.101 hostname=master ansible_ssh_user=root  ansible_ssh_pass=1995
+
+[node]
+192.168.129.102 hostname=node1 ansible_ssh_user=root  ansible_ssh_pass=1995
+
+

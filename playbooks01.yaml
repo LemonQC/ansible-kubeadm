@@ -1,0 +1,32 @@
+---
+#安装必备工具
+- hosts: clusters
+  remote_user: root
+  roles:
+    - role: clusters
+
+
+#主节点和slave节点初始化
+
+- hosts: master
+  remote_user: root
+  roles:
+    - role: master
+
+- hosts: node
+  remote_user: root
+  roles:
+    - role: nodes
+
+
+#安装Istio
+- hosts: clusters
+  remote_user: root
+  roles:
+    - role: istios
+
+#清理安装
+- hosts: clusters
+  remote_user: root
+  roles:
+    - role: cleans
